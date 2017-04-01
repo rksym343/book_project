@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import kr.or.dgit.book_project.basic_panel.AbsViewPanel;
 import kr.or.dgit.book_project.book_panel.BookInfo;
 import kr.or.dgit.book_project.book_panel.BookSearchPanel;
+import kr.or.dgit.book_project.dto.PublisherInfo;
+import kr.or.dgit.book_project.service.PublisherInfoService;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +19,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class BookInsertView extends AbsViewPanel implements ActionListener {
@@ -123,8 +126,14 @@ public class BookInsertView extends AbsViewPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "추가할 내용이 없습니다.");
 		} else {
 			// insert문
-			JOptionPane.showMessageDialog(null, "추가되었습니다.");
+			PublisherInfo ps = new PublisherInfo();
+			ps.setPublisher(pContent.getTfAddPublisher().getText());
+			PublisherInfoService pis = new PublisherInfoService();
+			List<PublisherInfo> list = pis.insertAndselectByAll(pContent.getTfAddPublisher().getText());
+			
 			// 추가후... 추가한 항목을 selected로
+			pContent.getpPublisher().setComboDate(list);
+			pContent.getpPublisher().setSelected(pis.selectCountAll());
 		}
 	}
 }

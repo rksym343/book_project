@@ -2,6 +2,8 @@ package kr.or.dgit.book_project.book_panel;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,6 +13,8 @@ import kr.or.dgit.book_project.basic_panel.BookCodePanel;
 import kr.or.dgit.book_project.basic_panel.ComboBoxPanel;
 import kr.or.dgit.book_project.basic_panel.InputComp;
 import kr.or.dgit.book_project.basic_panel.SpinnerPanel;
+import kr.or.dgit.book_project.dto.PublisherInfo;
+import kr.or.dgit.book_project.service.PublisherInfoService;
 
 import javax.swing.JButton;
 import java.awt.Dimension;
@@ -25,7 +29,7 @@ public class BookInfo extends JPanel {
 	private InputComp pAuthor;
 	private InputComp pBName;
 	private SpinnerPanel pPrice;
-	private ComboBoxPanel pPublisher;
+	protected ComboBoxPanel pPublisher;
 
 	public BookInfo() {
 		setLayout(new GridLayout(0, 1, 0, 0));
@@ -92,7 +96,10 @@ public class BookInfo extends JPanel {
 		panel.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 2, 5, 0));
 
+		PublisherInfoService pis = new PublisherInfoService();
+		List<PublisherInfo> list = pis.selectByAll();
 		pPublisher = new ComboBoxPanel();
+		pPublisher.setComboDate(list);
 		pPublisher.setTitle("출  판  사");
 		panel_2.add(pPublisher);
 
@@ -112,6 +119,8 @@ public class BookInfo extends JPanel {
 
 	}
 
+	
+	
 	public JTextField getTfAddPublisher() {
 		return tfAddPublisher;
 	}
@@ -148,6 +157,12 @@ public class BookInfo extends JPanel {
 			//e.printStackTrace();
 		}
 		
+	}
+
+
+
+	public ComboBoxPanel getpPublisher() {
+		return pPublisher;
 	}
 
 }

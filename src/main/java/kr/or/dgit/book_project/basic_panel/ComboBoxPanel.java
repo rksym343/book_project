@@ -2,9 +2,10 @@ package kr.or.dgit.book_project.basic_panel;
 
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.util.Vector;
+import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
 public class ComboBoxPanel<T> extends CompPanel {
@@ -19,6 +20,12 @@ public class ComboBoxPanel<T> extends CompPanel {
 
 	}
 
+	public void setComboDate(List<T> items) {
+		for (T t : items) {
+			comboBox.addItem(t);
+		}
+	}
+	
 	public JComboBox<T> getComboBox() {
 		return comboBox;
 	}
