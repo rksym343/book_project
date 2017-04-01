@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.book_project.dao.BookInfoMapper">
+	<!-- <sql id="insertSql">
+		insert into bookInfo(b_code, b_sub_code, b_name, author, p_code, price, insert_date, is_del)values
+		(#{bCode},#{bSubCode},#{bName},#{author},#{pCode},#{price},#{insertDate},#{isDel});
+	</sql>
+	<sql id="selectCountSql">
+		select count(*) from publisherinfo
+	</sql>
 
+	<insert id="insertBookInfo" parameterType="BookInfo">
+		<include refid="insertShortSql" />
+	</insert>
+	<select id="selectCountAll" resultType="int">
+		<include refid="selectCountSql" />
+	</select> -->
 </mapper>

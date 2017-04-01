@@ -1,5 +1,7 @@
 package kr.or.dgit.book_project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
@@ -23,5 +25,10 @@ public class PublisherInfoMapperImpl implements PublisherInfoMapper {
 	public int selectCountAll() {
 		log.debug("selectCountAll()");
 		return sqlSession.selectOne(namespace + "selectCountAll");
+	}
+	@Override
+	public List<PublisherInfo> selectByAll() {
+		log.debug("selectByAll()");
+		return sqlSession.selectList(namespace + "selectByAll");
 	}
 }

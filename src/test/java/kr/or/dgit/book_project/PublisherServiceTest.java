@@ -2,6 +2,9 @@ package kr.or.dgit.book_project;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import org.junit.After;
@@ -52,7 +55,7 @@ public class PublisherServiceTest {
 	}
 
 	@Test
-	public void btestinsertPubliherShort() {
+	public void btestinsertPubliherShort() { // 출판사코드 셋팅
 		PublisherInfo pi = new PublisherInfo();
 		int cnt = publisherInfoService.selectCountAll();
 		String pCode = String.format("P%03d", cnt+1);
@@ -60,6 +63,13 @@ public class PublisherServiceTest {
 		pi.setPublisher("출판사추가" + cnt+1);
 		int res = publisherInfoService.insertPubliherShort(pi);
 		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void ctestselectByAll() {  // 추후 도서등록화면에서 출판사 콤보박스에 넣을 정보
+		List<PublisherInfo> list = new ArrayList<>();
+		list = publisherInfoService.selectByAll();
+		Assert.assertNotNull(list);
 	}
 
 }
