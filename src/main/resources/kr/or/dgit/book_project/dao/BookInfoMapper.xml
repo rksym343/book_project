@@ -9,15 +9,15 @@
 		<result property="price" column="price" />
 		<result property="insertDate" column="insert_date" />
 		<result property="isDel" column="is_del" />
-		<association property="cName"
+		<association property="coden"
 			resultMap="kr.or.dgit.book_project.dao.CodenMapper.CodenResult"></association>
-		<association property="pCode"
+		<association property="publisherInfo"
 			resultMap="kr.or.dgit.book_project.dao.PublisherInfoMapper.PublisherInfoResult" />
 	</resultMap>
 	<sql id="insertSql">
 		insert into bookInfo(b_code, b_sub_code, c_name, b_name,
 		author, p_code, price, insert_date, is_del) values
-		(#{bCode},#{bSubCode},#{cName.cName},#{bName},#{author},#{pCode.pCode},#{price},#{insertDate},#{isDel});
+		(#{bCode},#{bSubCode},#{coden.cName},#{bName},#{author},#{publisherInfo.pCode},#{price},#{insertDate},#{isDel});
 	</sql>
 	<sql id="selectCountSql">
 		select count(*) from bookInfo
