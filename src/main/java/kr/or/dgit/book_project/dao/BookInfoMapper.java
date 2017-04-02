@@ -8,7 +8,7 @@ import kr.or.dgit.book_project.dto.BookInfo;
 public interface BookInfoMapper {
 	int insertBookInfo(BookInfo bookInfo);
 
-	BookInfo selectBookInfo(Map<String, Object> param);
+	List<BookInfo> selectBookInfo(Map<String, Object> param);
 
 	List<BookInfo> selectBookInfoByAll();
 

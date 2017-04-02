@@ -39,7 +39,6 @@
 		from bookInfo b
 		join publisherInfo p on
 		b.p_code = p.p_code
-		where is_del = false
 	</sql>
 
 	<insert id="insertBookInfo" parameterType="BookInfo">
@@ -62,15 +61,22 @@
 	<select id="selectBookInfoByAll" parameterType="BookInfo"
 		resultMap="BookInfoResult">
 		<include refid="selectSql" />
+		where is_del = false
 	</select>
 
-	<select id="selectBookInfo" parameterType="hashMap" resultMap="BookInfoResult">
+	<select id="selectBookInfo" parameterType="hashmap" resultMap="BookInfoResult">
 		<include refid="selectSql" />
-		<if test="bCode != null">
-			and b_code = #{bCode}
-		</if>
-		<if test="bSubCode != null">
-			and b_sub_code = #{bSubCode}
-		</if>
+		<where>
+			<if test="isDel != null">
+				is_del = #{isDel}
+			</if>
+			<if test="bCode != null">
+				and b.b_code = #{bCode}
+			</if>
+			<if test="bSubCode != null">
+				and b.b_sub_code = #{bSubCode}
+			</if>
+		</where>
+
 	</select>
 </mapper>

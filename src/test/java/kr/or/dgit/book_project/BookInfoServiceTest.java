@@ -59,24 +59,25 @@ public class BookInfoServiceTest {
 		Assert.assertSame(1, res);
 	}*/
 
-/*@Test
-	public void ctestselectBookInfo() {
-		BookInfo bookInfo = new BookInfo();
+@Test
+	public void ctestselectBookInfo() { // 왜 안돼 한개 선택 왜왜왜왜왜왜 왜 왜 조건절 안먹어
+		/*BookInfo bookInfo = new BookInfo();
 		bookInfo.setbCode("T001");
 		bookInfo.setbSubCode(0);
-		
+		*/
 		Map<String, Object> param = new HashMap<>();
+		param.put("isDel", false);
 		param.put("bCode", "T001");
-		param.put("bSubCode", 00);
-		BookInfo bookInfoRes = bookInfoService.selectBookInfo(param);
+		param.put("bSubCode", "00");
+		List<BookInfo> bookInfoRes = bookInfoService.selectBookInfo(param);
 		Assert.assertNotNull(bookInfoRes);
 
-	}*/
+	}
 
-	@Test
+	/*@Test
 	public void dtestselectBookInfoByAll() {
 		List<BookInfo> list = bookInfoService.selectBookInfoByAll();
 		Assert.assertNotNull(list);
-	}
+	}*/
 
 }

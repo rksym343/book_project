@@ -21,7 +21,7 @@ public class BookInfoService {
 		}
 	}
 
-	public BookInfo selectBookInfo(Map<String, Object> param) {
+	public List<BookInfo> selectBookInfo(Map<String, Object> param) {
 		try (SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			BookInfoMapper bookInfoMapper = new BookInfoMapperImpl(sqlSession);
 			return bookInfoMapper.selectBookInfo(param);

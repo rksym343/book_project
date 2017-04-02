@@ -77,12 +77,6 @@ public class BookInfo { // 도서
 		this.isDel = isDel;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("%s, %s, %s, %s, %s, %s, %s, %s,%s", bCode, bSubCode, bName, author, price, insertDate,
-				isDel, coden, publisherInfo);
-	}
-
 	public String getInsertDate() {
 		return insertDate;
 	}
@@ -105,6 +99,12 @@ public class BookInfo { // 도서
 
 	public void setPublisherInfo(PublisherInfo publisherInfo) {
 		this.publisherInfo = publisherInfo;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s, %s, %s, %s, %s, %s, %s, %s,%s", bCode, bSubCode, bName, author, price, insertDate,
+				isDel, coden, publisherInfo);
 	}
 
 }

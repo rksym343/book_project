@@ -26,9 +26,9 @@ public class BookInfoMapperImpl implements BookInfoMapper {
 	}
 
 	@Override
-	public BookInfo selectBookInfo(Map<String, Object> param) {
+	public List<BookInfo> selectBookInfo(Map<String, Object> param) {
 		log.debug("selectBookInfo()");
-		return sqlSession.selectOne(namespace + "selectBookInfo");
+		return sqlSession.selectList(namespace + "selectBookInfo");
 	}
 
 	@Override
