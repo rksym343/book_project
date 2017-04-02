@@ -263,6 +263,8 @@ INSERT INTO book_project.bookInfo(b_code, b_sub_code, c_name,b_name,author,p_cod
 ('D001',00,'자기계발', '쓸모없는짓의행복', '크리스길아보', 'P016', 15000,'2016-03-22'),
 ('D002',00,'자기계발', '버리고시작하라', '위르겐볼프', 'P017', 12000,'2016-04-03');
 		
+select count(*) from bookinfo where c_name = '여행';
+
 INSERT INTO book_project.booklend (b_code, b_sub_code, is_lending, b_lend_count) values 
 ('T001',00, true, 1),
 ('T001',01, true, 2),
@@ -368,3 +370,12 @@ INSERT INTO book_project.paymentIO (no, b_code, b_sub_code, m_code, lend_date, r
 (37,'T002',00,'C001','2017-03-23' , null),
 (38,'D001',00,'C004','2017-03-23' , null),
 (39,'H003',00,'C009','2017-03-23' , null);		
+
+
+create trigger booklend_after_insert_bookinfo
+after insert 
+on bookInfo
+for each row 
+begin 
+insert into bookLend(b_code,b_sub_code,is_lending,b_lend_count) values(new.b_code, new.b_sub_code, false, 0);
+end;

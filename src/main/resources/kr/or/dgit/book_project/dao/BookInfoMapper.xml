@@ -1,18 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.book_project.dao.BookInfoMapper">
-	<!-- <sql id="insertSql">
-		insert into bookInfo(b_code, b_sub_code, b_name, author, p_code, price, insert_date, is_del)values
-		(#{bCode},#{bSubCode},#{bName},#{author},#{pCode},#{price},#{insertDate},#{isDel});
+
+	<resultMap type="BookInfo" id="BookInfoResult">
+		<result property="bCode" column="b_code" />
+		<result property="bSubCode" column="b_sub_code" />
+		<result property="author" column="author" />
+		<result property="price" column="price" />
+		<result property="insertDate" column="insert_date" />
+		<result property="isDel" column="is_del" />
+		<association property="cName"
+			resultMap="kr.or.dgit.book_project.dao.CodenMapper.CodenResult"></association>
+		<association property="pCode"
+			resultMap="kr.or.dgit.book_project.dao.PublisherInfoMapper.PublisherInfoResult" />
+	</resultMap>
+	<sql id="insertSql">
+		insert into bookInfo(b_code, b_sub_code, c_name, b_name,
+		author, p_code, price, insert_date, is_del) values
+		(#{bCode},#{bSubCode},#{cName.cName},#{bName},#{author},#{pCode.pCode},#{price},#{insertDate},#{isDel});
 	</sql>
 	<sql id="selectCountSql">
-		select count(*) from publisherinfo
+		select count(*) from bookInfo
+		<choose>
+			<when test="searchBy=='Coden'">
+				where c_name = #{cName}
+			</when>
+			<when test="searchBy=='bCode'">
+				where b_code = #{bCode}
+			</when>
+			<otherwise>
+
+			</otherwise>
+		</choose>
+	</sql>
+	<sql id="selectSql">
+		select b.b_code, b_sub_code, b_name, c_name, author,
+		p.p_code, publisher, price
+		from bookInfo b
+		join publisherInfo p on
+		b.p_code = p.p_code
+		where is_del = false
 	</sql>
 
 	<insert id="insertBookInfo" parameterType="BookInfo">
-		<include refid="insertShortSql" />
+		<include refid="insertSql" />
 	</insert>
-	<select id="selectCountAll" resultType="int">
-		<include refid="selectCountSql" />
-	</select> -->
+	<select id="selectBookInfoCountBy" parameterType="hashmap"
+		resultType="int">
+		<!-- <include refid="selectCountSql" /> -->
+		select count(*) from bookInfo
+		<choose>
+			<when test="searchBy=='Coden'">
+				where c_name = #{cName}
+			</when>
+			<when test="searchBy=='bCode'">
+				where b_code = #{bCode}
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectBookInfoByAll" parameterType="BookInfo"
+		resultMap="BookInfoResult">
+		<include refid="selectSql" />
+	</select>
+
+	<select id="selectBookInfo" parameterType="hashMap" resultMap="BookInfoResult">
+		<include refid="selectSql" />
+		<if test="bCode != null">
+			and b_code = #{bCode}
+		</if>
+		<if test="bSubCode != null">
+			and b_sub_code = #{bSubCode}
+		</if>
+	</select>
 </mapper>

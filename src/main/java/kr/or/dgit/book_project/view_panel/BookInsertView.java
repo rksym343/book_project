@@ -126,14 +126,19 @@ public class BookInsertView extends AbsViewPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "추가할 내용이 없습니다.");
 		} else {
 			// insert문
+			PublisherInfoService pis = new PublisherInfoService();
 			PublisherInfo ps = new PublisherInfo();
 			ps.setPublisher(pContent.getTfAddPublisher().getText());
-			PublisherInfoService pis = new PublisherInfoService();
-			List<PublisherInfo> list = pis.insertAndselectByAll(pContent.getTfAddPublisher().getText());
+			pis.insertPubliherShort(ps);
+			List<PublisherInfo> list = pis.selectByAll();
 			
 			// 추가후... 추가한 항목을 selected로
-			pContent.getpPublisher().setComboDate(list);
-			pContent.getpPublisher().setSelected(pis.selectCountAll());
+			
+			pContent.getpPublisher().getComboBox().removeAllItems(); // 기존목록 지우기
+			pContent.getpPublisher().setComboDate(list); // 새 목록 넣기
+			// 목록을 넣지 않고 새로 추가된 애만 additem???? 고민중
+			pContent.getpPublisher().setSelected(pis.selectCountAll()-1); // 제일 마지막 출판사 선택하기
+			pContent.getTfAddPublisher().setText(""); // 텍스트필드 초기화
 		}
 	}
 }

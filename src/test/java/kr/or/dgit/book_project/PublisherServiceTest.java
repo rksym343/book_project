@@ -47,7 +47,7 @@ public class PublisherServiceTest {
 
 	///////////////////////////////
 
-	@Test
+	/*@Test
 	public void atestselectCountAll() {
 		int res = publisherInfoService.selectCountAll();
 		JOptionPane.showMessageDialog(null, "출판사개수: " + res);
@@ -70,6 +70,6 @@ public class PublisherServiceTest {
 		List<PublisherInfo> list = new ArrayList<>();
 		list = publisherInfoService.selectByAll();
 		Assert.assertNotNull(list);
-	}
+	}*/
 
 }

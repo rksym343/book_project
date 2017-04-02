@@ -16,8 +16,12 @@ public class PublisherInfoService {
 	public int insertPubliherShort(PublisherInfo publisherInfo) {
 		try (SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			PublisherInfoMapper publisherInfoMapper = new PublisherInfoMapperImpl(sqlSession);
+			int cnt = selectCountAll();
+			String pCode = String.format("P%03d", cnt + 1);
+			publisherInfo.setpCode(pCode);
 			int res = publisherInfoMapper.insertPubliherShort(publisherInfo);
 			sqlSession.commit();
+			JOptionPane.showMessageDialog(null, "추가되었습니다.");
 			return res;
 		}
 	}

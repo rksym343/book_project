@@ -2,21 +2,22 @@ package kr.or.dgit.book_project.dto;
 
 import java.util.Date;
 
-public class BookInfo {		 		// 도서
-	private String bCode;			// 도서코드
-	private String bSubCode;		// 도서 중복 코드
-	private String bName;			// 도서명	
-	private String author;			// 저자
-	private int price;				// 가격
-	private String insertDate;		// 도서등록일
-	private boolean isDel;			// 도서폐기여부
-	private Coden cName;			// 분류
-	private PublisherInfo pCode;	// 출판사 코드
-	
-	public BookInfo() {		}
+public class BookInfo { // 도서
+	private String bCode; // 도서코드
+	private String bSubCode; // 도서 중복 코드
+	private String bName; // 도서명
+	private String author; // 저자
+	private int price; // 가격
+	private String insertDate; // 도서등록일
+	private boolean isDel; // 도서폐기여부
+	private Coden cName; // 분류
+	private PublisherInfo pCode; // 출판사 코드
 
-	public BookInfo(String bCode, String bSubCode, String bName, String author,
-					int price, String insertDate, boolean isDel, Coden cName, PublisherInfo pCode) {
+	public BookInfo() {
+	}
+
+	public BookInfo(String bCode, String bSubCode, String bName, String author, int price, String insert_date,
+			boolean isDel, Coden cName, PublisherInfo pCode) {
 		this.bCode = bCode;
 		this.bSubCode = bSubCode;
 		this.bName = bName;
@@ -68,14 +69,6 @@ public class BookInfo {		 		// 도서
 		this.price = price;
 	}
 
-	public String getInsertDate() {
-		return insertDate;
-	}
-
-	public void setInsertDate(String insertDate) {
-		this.insertDate = insertDate;
-	}
-
 	public boolean isDel() {
 		return isDel;
 	}
@@ -102,8 +95,15 @@ public class BookInfo {		 		// 도서
 
 	@Override
 	public String toString() {
-		return String.format(
-				"%s, %s, %s, %s, %s, %s, %s, %s,%s",
-				bCode, bSubCode, bName, author, price, insertDate, isDel, cName, pCode);
+		return String.format("%s, %s, %s, %s, %s, %s, %s, %s,%s", bCode, bSubCode, bName, author, price, insertDate,
+				isDel, cName, pCode);
+	}
+
+	public String getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(String insertDate) {
+		this.insertDate = insertDate;
 	}
 }
